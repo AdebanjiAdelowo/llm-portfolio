@@ -1,0 +1,8 @@
+{
+  "label": "FinBERT Baseline",
+  "accuracy": 0.9757,
+  "f1_weighted": 0.9761,
+  "params_M": 109.48,
+  "size_mb": 417.67,
+  "ms_per_sample": 15.345
+}

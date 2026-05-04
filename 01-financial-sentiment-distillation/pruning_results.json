@@ -1,0 +1,32 @@
+{
+  "head_pruned": {
+    "label": "Head Pruned (30%)",
+    "accuracy": 0.9536,
+    "f1_weighted": 0.953,
+    "params_M": 109.48,
+    "size_mb": 417.67,
+    "ms_per_sample": 13.272
+  },
+  "layer_dropped": {
+    "label": "Layer Dropped (3 layers)",
+    "accuracy": 0.6181,
+    "f1_weighted": 0.4804,
+    "params_M": 88.22,
+    "size_mb": 336.55,
+    "ms_per_sample": 9.32
+  },
+  "combined": {
+    "label": "Combined (head 20% + 2 layers)",
+    "accuracy": 0.6512,
+    "f1_weighted": 0.5556,
+    "params_M": 95.31,
+    "size_mb": 363.59,
+    "ms_per_sample": 14.262
+  },
+  "layers_dropped": [
+    0,
+    1,
+    11
+  ],
+  "n_layers_remaining": 3
+}

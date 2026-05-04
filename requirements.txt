@@ -1,0 +1,29 @@
+# Core ML & Deep Learning
+torch>=2.11.0
+transformers>=5.7.0
+datasets>=4.8.5
+sentence-transformers>=5.4.1
+
+# Classical ML
+scikit-learn>=1.8.0
+xgboost>=3.2.0
+
+# Dimensionality Reduction
+umap-learn>=0.5.12
+
+# Data
+numpy>=2.4.4
+pandas>=3.0.2
+
+# Visualization
+matplotlib>=3.10.9
+seaborn>=0.13.2
+
+# LLM APIs
+openai>=2.33.0
+anthropic>=0.97.0
+
+# Utilities
+python-dotenv>=1.2.2
+jupyter>=1.1.1
+ipykernel>=7.2.0
