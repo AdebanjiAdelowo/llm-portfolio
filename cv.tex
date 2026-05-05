@@ -1,0 +1,178 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[a4paper, top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm]{geometry}
+\usepackage{parskip}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{fontenc}
+\usepackage[default]{lato}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{microtype}
+
+\definecolor{VividPurple}{HTML}{6A0DAD}
+
+% Section formatting
+\titleformat{\section}{\large\bfseries\color{VividPurple}}{}{0em}{}[\color{VividPurple}\hrule]
+\titlespacing{\section}{0pt}{8pt}{4pt}
+
+\setlist[itemize]{leftmargin=1.5em, itemsep=0pt, topsep=2pt, parsep=0pt}
+
+\hypersetup{colorlinks=true, urlcolor=VividPurple}
+
+\pagestyle{empty}
+
+% Custom commands
+\newcommand{\cventry}[5]{%
+  \noindent\textbf{#1} \hfill \textit{#2}\\
+  \textit{#3} \hfill \textit{#4}%
+  \ifx&#5&\else\\\textit{#5}\fi
+  \vspace{2pt}
+}
+
+\begin{document}
+
+%---------- HEADER ----------
+\begin{center}
+  {\LARGE\bfseries\color{VividPurple} Adebanji Adelowo}\\[4pt]
+  {\large Machine Learning Engineer \textbar{} Generative AI \& LLM Engineer}\\[4pt]
+  \small
+  \href{mailto:adelowooluwatimileyin@gmail.com}{adelowooluwatimileyin@gmail.com} \quad
+  +39 388 751 5527 \quad
+  Italy \quad
+  \href{https://linkedin.com/in/adebanjioluwatimileyin}{linkedin/adebanjioluwatimileyin} \quad
+  \href{https://github.com/adebanjiadelowo}{github/adebanjiadelowo} \quad
+  \href{https://adebanjioluwatimileyin.github.io/}{Portfolio}
+\end{center}
+
+\vspace{-4pt}
+
+%---------- PROFILE ----------
+\section{Profile}
+Machine Learning Engineer specializing in Generative AI and Large Language Models (LLMs), with strong experience in data analysis and machine learning. Proven track record of building end-to-end AI systems, including data pipelines, APIs, and production deployments. Focused on retrieval-augmented generation (RAG), LLM fine-tuning, and scalable multi-provider AI architectures.
+
+%---------- EDUCATION ----------
+\section{Education}
+
+\cventry{MSc Mathematical Engineering}{2018 -- 2021}{University of L'Aquila}{Italy}{} \\
+\cventry{BSc Mathematics}{2014 -- 2018}{Obafemi Awolowo University}{Nigeria}{}
+
+%---------- EXPERIENCE ----------
+\section{Experience}
+
+\cventry{Generative AI Engineer (Freelance)}{Oct 2025 -- Present}{}{}{}
+\begin{itemize}
+  \item Designed and deployed production-ready LLM applications using retrieval-augmented generation (RAG)
+  \item Developed vector search pipelines using Pinecone, FAISS, and ChromaDB for semantic retrieval
+  \item Implemented LLM pipelines for code analysis, conversational AI, and document-based QA systems
+\end{itemize}
+
+\medskip
+\cventry{Data Scientist}{Dec 2024 -- Sep 2025}{Intuos Srl}{L'Aquila}{}
+\begin{itemize}
+  \item Implemented ML classifier for flight phase identification using real-time telemetry data
+  \item Built REST APIs (50+ endpoints) for flight and pilot management systems
+  \item Built audio-based engine monitoring system using FFT for RPM detection
+  \item Developed dashboards for flight performance analysis and automated data pipelines
+\end{itemize}
+
+\medskip
+\cventry{Machine Learning Engineer}{Apr 2023 -- Nov 2024}{N-and Italia Srl}{Bergamo}{}
+\begin{itemize}
+  \item Analysed log data from 150+ vending machines (154 machine IDs), extracting insights on user interactions, system performance, and failure events
+  \item Developed predictive models for product delivery failure forecasting, identifying key pre-failure events (OAA, UIPU, EIL, EID) across the machine fleet
+  \item Built dashboards tracking transaction counts (up to 1.5M per machine), delivery success vs.\ failure rates, internet connectivity issues, and VMC non-response events
+  \item Profiled user behaviour across UI pages (category, product selection, modify, delivery) and analysed wrong button selection patterns to support UX improvements
+  \item Conducted product preference analysis across 20+ SKUs and modelled sugar/strength customisation behaviour across 154 machines
+  \item Investigated system reliability metrics including OS failures, internet status issues, and mean delivery vs.\ selection time across the full machine fleet
+\end{itemize}
+
+\medskip
+\cventry{Operational Data Analyst}{2023}{eResult Srl}{Cesena}{}
+\begin{itemize}
+  \item Optimized SQL queries and database performance; built automated dashboards and reporting systems
+\end{itemize}
+
+\medskip
+\cventry{Digital Engineering Intern}{2022}{Bridgestone EMIA}{Rome}{}
+\begin{itemize}
+  \item Contributed to improving Product Lifecycle Management (PLM) tools for tire development workflows
+  \item Worked on the digital twin platform used for tire engineering and simulation
+\end{itemize}
+
+\medskip
+\cventry{Machine Learning Intern}{2022}{Fellowship.AI}{Remote}{}
+\begin{itemize}
+  \item Implemented GAN-based image generation models (InsetGAN); deployed ML models using FastAPI
+\end{itemize}
+
+%---------- PROJECTS ----------
+\section{Selected Projects}
+
+\noindent
+\textbf{\href{https://github.com/adebanjiadelowo/llm-portfolio/tree/main/01-financial-sentiment-distillation}{Financial Sentiment Distillation}} ---
+Compressed FinBERT by 62\% (110M $\to$ 88M parameters) via Taylor-gradient attention-head pruning and knowledge distillation, improving accuracy from 84.5\% to \textbf{96.9\%} on the financial\_phrasebank benchmark.
+\textit{Stack: PyTorch, HuggingFace Transformers, scikit-learn}
+
+\textbf{\href{https://github.com/adebanjiadelowo/llm-portfolio/tree/main/02-enterprise-nl2sql}{Enterprise NL2SQL Pipeline}} ---
+Two-stage LLM pipeline for natural language to SQL over an 8-table enterprise database. A lightweight table-selector cuts prompt token cost by \textbf{$\sim$60\%}; a complexity router auto-escalates multi-table queries to a stronger model. Includes retry logic and SQL injection guard.
+\textit{Stack: OpenAI API (GPT-4o-mini), Python, pandas}
+
+\textbf{\href{https://github.com/adebanjiadelowo/llm-portfolio/tree/main/03-bank-customer-risk-engine}{Bank Customer Risk Engine}} ---
+Embedding-powered risk assessment system encoding customer profiles into 384-dim sentence-transformer vectors. A multi-output model simultaneously predicts loan approval probability, default risk, and adjusted interest rate; cosine-similarity search enables nearest-neighbour customer profiling.
+\textit{Stack: sentence-transformers, XGBoost, scikit-learn, UMAP}
+
+\textbf{\href{https://github.com/AdebanjiAdelowo/generative-ai-portfolio/blob/main/End-to-End-AI-Applications/End-to-end-Medical-Chatbot-Generative-AI}{RAG Medical Chatbot}} --- Built medical Q\&A system using RAG; integrated Pinecone for semantic search and context-aware responses. \textit{Stack: OpenAI, Pinecone, LangChain, Flask}
+
+\textbf{\href{https://github.com/AdebanjiAdelowo/generative-ai-portfolio/tree/main/Cloud-LLM-Apps}{Multi-Provider RAG Systems}} --- Portable RAG pipelines across OpenAI, AWS Bedrock, and Vertex AI with modular provider-switching architecture. \textit{Stack: Bedrock, FAISS/ChromaDB, LangChain, Streamlit}
+
+\textbf{\href{https://github.com/AdebanjiAdelowo/generative-ai-portfolio/blob/main/End-to-End-AI-Applications/End-to-end-Source-Code-Analysis-Generative-AI}{LLM Code Analysis Tool}} --- Natural-language querying over full codebases using LLMs; indexed repositories with ChromaDB for semantic retrieval. \textit{Stack: OpenAI, ChromaDB, LangChain, Flask}
+
+\textbf{\href{https://github.com/AdebanjiAdelowo/generative-ai-portfolio/blob/main/Fine-Tuning-LLMs/Llama2-Fine-Tuning}{Llama 2 Fine-Tuning}} --- Supervised fine-tuning for domain-specific adaptation; evaluated improvements over base models. \textit{Stack: Llama 2, HuggingFace}
+
+\textbf{Conversational AI Systems} ---
+\href{https://github.com/AdebanjiAdelowo/generative-ai-portfolio/blob/main/End-to-End-AI-Applications/LLM-Apps-with-Chainlit}{OrderBot} (real-time chat with Chainlit) and
+\href{https://github.com/AdebanjiAdelowo/generative-ai-portfolio/blob/main/OpenAI-Projects/Telegram-chatbot}{Telegram Chatbot} (OpenAI APIs).
+
+\textbf{Computer Vision \& Inverse Problems (2021)} ---
+\href{https://github.com/AdebanjiAdelowo/Image_inpainting}{TV-regularized image inpainting};
+\href{https://github.com/AdebanjiAdelowo/DeepLearningprojects}{U-Net roof segmentation};
+\href{https://github.com/AdebanjiAdelowo/Image_denoising_using_ResNet}{ResNet-based denoising} and transfer learning classification.
+
+%---------- SKILLS ----------
+\section{Skills}
+
+\begin{multicols}{2}
+\textbf{Generative AI \& LLMs}\\
+LangChain, LlamaIndex, HuggingFace Transformers\\
+OpenAI (GPT-4, Whisper, DALL·E)\\
+AWS Bedrock, Google Vertex AI, Gemini\\
+RAG, Prompt Engineering, Fine-tuning
+
+\medskip
+\textbf{Machine Learning}\\
+PyTorch, TensorFlow, scikit-learn\\
+Predictive modeling, classification, time series
+
+\medskip
+\textbf{Vector Databases:} Pinecone, FAISS, ChromaDB
+
+\columnbreak
+
+\textbf{Software Engineering}\\
+Python, SQL, FastAPI, Flask\\
+REST APIs, Microservices, Git, Docker
+
+\medskip
+\textbf{Cloud \& MLOps}\\
+AWS, Vertex AI, Model deployment, LLMOps
+
+\medskip
+\textbf{Signal Processing}\\
+FFT, audio analysis, telemetry systems
+\end{multicols}
+
+\end{document}
