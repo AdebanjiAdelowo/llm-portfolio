@@ -1,20 +1,24 @@
 # LLM Portfolio Projects
 
 **Author:** Adebanji Oluwatimileyin Adelowo  
-**GitHub:** [adebanjiadelowo](https://github.com/adebanjiadelowo)  
+**GitHub:** [AdebanjiAdelowo](https://github.com/AdebanjiAdelowo)  
 **Email:** adelowooluwatimileyin@gmail.com
 
 ---
 
-A collection of end-to-end Large Language Model projects covering model optimization, NL2SQL pipelines, and embedding-based financial intelligence systems.
+A collection of end-to-end Large Language Model projects covering model optimization, NL2SQL pipelines, embedding-based systems, LangChain agents, RAG, evaluation frameworks, and parameter-efficient fine-tuning.
 
 ## Projects
 
-| # | Project | Domain | Key Techniques | Results |
-|---|---------|--------|----------------|---------|
-| 01 | [Financial Sentiment Distillation](#01-financial-sentiment-distillation) | FinTech / NLP | Pruning, Knowledge Distillation | 96.9% accuracy, 62% parameter reduction |
-| 02 | [Enterprise NL2SQL Pipeline](#02-enterprise-nl2sql-pipeline) | Data Engineering | Multi-stage LLM routing, Prompt Engineering | ~60% token cost reduction |
-| 03 | [Bank Customer Risk Engine](#03-bank-customer-risk-engine) | FinTech / ML | Embeddings, XGBoost, Multi-output Regression | End-to-end risk scoring pipeline |
+| # | Project | Domain | Key Techniques |
+|---|---------|--------|----------------|
+| 01 | [Financial Sentiment Distillation](#01-financial-sentiment-distillation) | FinTech / NLP | Pruning, Knowledge Distillation |
+| 02 | [Enterprise NL2SQL Pipeline](#02-enterprise-nl2sql-pipeline) | Data Engineering | Multi-stage LLM routing, Prompt Engineering |
+| 03 | [Bank Customer Risk Engine](#03-bank-customer-risk-engine) | FinTech / ML | Embeddings, XGBoost, Multi-output Regression |
+| 04 | [LLM-Powered Data Analyst Agent](#04-llm-powered-data-analyst-agent) | Analytics | LangChain Agents, Pandas DataFrame Agent |
+| 05 | [Medical RAG Assistant](#05-medical-rag-assistant) | Healthcare / NLP | RAG, ChromaDB, Conversational Memory |
+| 06 | [LLM Evaluation with LangSmith](#06-llm-evaluation-with-langsmith) | MLOps / Evaluation | Embedding Distance, LangSmith Tracing |
+| 07 | [LoRA & QLoRA Fine-Tuning](#07-lora--qlora-fine-tuning) | Model Training | PEFT, LoRA, 4-bit Quantization |
 
 ---
 
@@ -39,39 +43,23 @@ FinBERT (baseline) → Attention Head Pruning → Layer Dropping → Knowledge D
 
 **Tech stack:** PyTorch, HuggingFace Transformers, financial_phrasebank dataset, scikit-learn
 
-**Notebooks:**
-1. `01_Baseline_Evaluation.ipynb` — load FinBERT, benchmark on financial_phrasebank
-2. `02_Model_Pruning.ipynb` — Taylor-gradient head pruning + activation-norm layer dropping
-3. `03_Knowledge_Distillation.ipynb` — KL divergence soft-loss distillation (T=3, α=0.7)
-
 ---
 
 ## 02 Enterprise NL2SQL Pipeline
 
 **Folder:** `02-enterprise-nl2sql/`
 
-A two-stage LLM pipeline that translates natural language business questions into SQL queries against an 8-table enterprise HR/company database. A lightweight model first identifies which tables are needed; a stronger model then generates accurate SQL from a focused prompt — dramatically reducing token costs compared to sending the full schema every time.
+A two-stage LLM pipeline that translates natural language business questions into SQL queries against an 8-table enterprise HR/company database. A lightweight model first identifies which tables are needed; a stronger model then generates accurate SQL from a focused prompt.
 
 **Architecture:**
 ```
 User Question → [Stage 1: Table Selector (GPT-3.5)] → Selected Tables
              → [Stage 2: SQL Generator (GPT-3.5 / GPT-4o-mini)] → SQL Query
-             → [Complexity Router] → auto-selects fast vs. strong model
 ```
 
-**Results:**
-- Average **60% token reduction** by selecting only relevant tables
-- Automatic model routing: simple queries use GPT-3.5, complex ones escalate to GPT-4o-mini
-- Full retry logic and SQL injection guard
+**Results:** ~60% token reduction by selecting only relevant tables; automatic model routing.
 
-**Tech stack:** OpenAI API (GPT-3.5-turbo, GPT-4o-mini), pandas, matplotlib
-
-**Notebooks:**
-1. `01_Table_Selector.ipynb` — lightweight table-selection model with JSON output
-2. `02_SQL_Generator.ipynb` — schema-rich prompt construction + SQL generation
-3. `03_NL2SQL_Pipeline.ipynb` — full `obtainSQL()` API with routing, retry, and safety guard
-
-**Requirements:** `OPENAI_API_KEY` in a `.env` file.
+**Tech stack:** OpenAI API, pandas, matplotlib
 
 ---
 
@@ -79,27 +67,62 @@ User Question → [Stage 1: Table Selector (GPT-3.5)] → Selected Tables
 
 **Folder:** `03-bank-customer-risk-engine/`
 
-An embedding-powered risk assessment and product recommendation engine for a retail bank. Customer profiles and transaction histories are encoded into dense vectors using `all-MiniLM-L6-v2`, then used to train a multi-output regression model that simultaneously predicts loan approval probability, default risk, and adjusted interest rate.
+An embedding-powered risk assessment engine for a retail bank. Customer profiles and transactions are encoded into dense vectors, then used to train a multi-output regression model predicting loan approval probability, default risk, and interest rate.
+
+**Tech stack:** sentence-transformers, UMAP, XGBoost, scikit-learn
+
+---
+
+## 04 LLM-Powered Data Analyst Agent
+
+**Folder:** `04-data-analyst-agent/`
+
+An autonomous data analyst agent built with LangChain and OpenAI that analyzes datasets through natural language. The agent identifies correlations, generates charts, selects forecasting models, and produces predictions — all from plain English instructions.
+
+**Key techniques:** LangChain `create_pandas_dataframe_agent`, agentic reasoning, multi-step tool use, completion vs. chat model comparison.
+
+**Tech stack:** LangChain, LangChain Experimental, OpenAI, Pandas
+
+---
+
+## 05 Medical RAG Assistant
+
+**Folder:** `05-medical-rag-assistant/`
+
+A conversational medical assistant using Retrieval-Augmented Generation (RAG). Embeds a medical Q&A knowledge base into ChromaDB and routes queries through a LangChain ReAct agent — answering clinical questions with grounded, context-aware responses while maintaining conversation memory.
 
 **Architecture:**
 ```
-Customer Text Profile → Sentence Transformer (384-dim) ─┐
-                                                         ├─► 768-dim feature vector → XGBoost / Multi-output Regressor
-Transaction History  → Sentence Transformer (384-dim) ─┘
+User Query → ReAct Agent → ChromaDB retrieval (medical) OR direct LLM (general) → Answer
 ```
 
-**Results:**
-- End-to-end `risk_decision()` function: text in, risk scores out
-- XGBoost classifier for approval decision
-- Multi-output regressor: approval probability + default probability + adjusted interest rate
-- Cosine similarity search for nearest-neighbour customer profiling
+**Tech stack:** LangChain, ChromaDB, OpenAI Embeddings, MedQuad dataset
 
-**Tech stack:** sentence-transformers, UMAP, XGBoost, scikit-learn, pandas, matplotlib
+---
 
-**Notebooks:**
-1. `01_Client_Embeddings.ipynb` — generate & store 384-dim client embeddings, UMAP visualisation
-2. `02_Product_Embeddings.ipynb` — product catalogue + transaction embeddings
-3. `03_Risk_Decision_Model.ipynb` — combine embeddings, train models, expose risk API
+## 06 LLM Evaluation with LangSmith
+
+**Folder:** `06-llm-evaluation-langsmith/`
+
+A systematic evaluation framework comparing LLM summarization quality using LangSmith tracing and cosine embedding distance. Benchmarks T5-base, fine-tuned T5, and OpenAI GPT on the CNN/DailyMail dataset — demonstrating the cost-quality tradeoff between open-source and proprietary models.
+
+**Results:** Fine-tuned T5 significantly outperforms zero-shot T5; OpenAI GPT achieves lowest embedding distance.
+
+**Tech stack:** LangSmith, LangChain, Hugging Face (T5), OpenAI, CNN/DailyMail dataset
+
+---
+
+## 07 LoRA & QLoRA Fine-Tuning
+
+**Folder:** `07-lora-qlora-finetuning/`
+
+Parameter-efficient fine-tuning of large language models using LoRA and QLoRA. Demonstrates how to fine-tune billion-parameter models (Llama-3.2-1B, Llama-3-8B) training fewer than 1% of total parameters, with and without 4-bit quantization to enable training on consumer hardware.
+
+**Key concepts:**
+- **LoRA:** injects trainable low-rank matrices alongside frozen weights (`W' = W + α·AB`)
+- **QLoRA:** 4-bit NF4 quantization + LoRA — fine-tune 8B models on a single 16GB GPU
+
+**Tech stack:** PEFT, BitsAndBytes, Transformers, trl, Llama 3
 
 ---
 
@@ -107,36 +130,35 @@ Transaction History  → Sentence Transformer (384-dim) ─┘
 
 ### Prerequisites
 - Python 3.10+
-- (Recommended) A GPU runtime — Google Colab T4 works for all projects
+- GPU recommended (Google Colab T4/L4 works for all projects)
 
 ### Installation
-
 ```bash
-git clone https://github.com/adebanjiadelowo/llm-portfolio.git
+git clone https://github.com/AdebanjiAdelowo/llm-portfolio.git
 cd llm-portfolio
 
 # Install dependencies for a specific project
-pip install -r 01-financial-sentiment-distillation/requirements.txt
+pip install -r 04-data-analyst-agent/requirements.txt
 ```
 
 ### Environment Variables
-For the NL2SQL project, create a `.env` file in `02-enterprise-nl2sql/`:
+Create a `.env` file in each project folder as needed:
 ```
-OPENAI_API_KEY=your_key_here
+OPENAI_API_KEY=your_openai_key
+LANGCHAIN_API_KEY=your_langsmith_key
+HUGGINGFACEHUB_API_TOKEN=your_hf_token
 ```
-
-### Running Order
-Each project's notebooks are numbered and must be run in order — later notebooks depend on artifacts saved by earlier ones.
 
 ---
 
 ## Skills Demonstrated
 
-- **LLM fine-tuning & compression** — pruning, knowledge distillation, model benchmarking
-- **LLM application development** — multi-stage pipelines, prompt engineering, API integration
-- **Embeddings & vector search** — semantic similarity, UMAP visualisation, nearest-neighbour retrieval
-- **ML engineering** — XGBoost, multi-output regression, evaluation metrics (accuracy, F1, BLEU, ROUGE)
-- **Production patterns** — retry logic, input validation, model routing, cost optimisation
+- **Agents & RAG** — LangChain agents, ChromaDB vector stores, ReAct reasoning, tool routing
+- **LLM Evaluation** — LangSmith tracing, embedding distance metrics, model benchmarking
+- **Fine-tuning & PEFT** — LoRA, QLoRA, 4-bit quantization, SFT training
+- **Model compression** — structured pruning, knowledge distillation
+- **LLM pipelines** — multi-stage routing, prompt engineering, NL2SQL
+- **Embeddings** — semantic similarity, UMAP, nearest-neighbour retrieval, XGBoost
 
 ---
 
