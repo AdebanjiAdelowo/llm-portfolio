@@ -52,26 +52,26 @@
 
 %---------- PROFILE ----------
 \section{Profile}
-Data Scientist and Machine Learning Engineer with 3+ years of production experience and an MSc in Mathematical Engineering (106/110). Delivers data-driven insights from complex datasets — from tracking 1.5M+ transactions across 154 machines to predictive failure modelling and automated reporting — and builds end-to-end AI systems, including a two-stage NL2SQL pipeline (60\% token cost reduction) and a compressed FinBERT model (84.5\% $\to$ 96.9\% accuracy). Skilled across the full stack: SQL, Power BI, Python, RAG pipelines, LLM fine-tuning, vector databases, and cloud deployment on AWS and Vertex AI.
+Mathematical Engineer turned AI/ML practitioner with 3+ years of production experience (MSc, 106/110). Delivered measurable results across both sides of the stack: compressed FinBERT by 62\% while pushing accuracy from 84.5\% to \textbf{96.9\%}, and cut LLM prompt costs by 60\% through a two-stage NL2SQL architecture. On the analytics side, tracked 1.5M+ transactions across 154 machines, built predictive failure models, and delivered operational Power BI dashboards. Fluent in Python, SQL, RAG pipelines, HuggingFace, and cloud deployment on AWS and Vertex AI.
 
 %---------- EDUCATION ----------
 \section{Education}
 
-\cventry{MSc Mathematical Engineering}{2018 -- 2021}{University of L'Aquila}{Italy}{Grade: 106/110 \quad \textit{\href{https://github.com/AdebanjiAdelowo/Master-Thesis}{Thesis: Mixing of Passive Scalars Advected by Incompressible Fields}}} \\
-\cventry{BSc Mathematics}{2014 -- 2018}{Obafemi Awolowo University}{Nigeria}{}
+\cventry{MSc Mathematical Engineering}{2018 to 2021}{University of L'Aquila}{Italy}{Grade: 106/110 \quad \textit{\href{https://github.com/AdebanjiAdelowo/Master-Thesis}{Thesis: Mixing of Passive Scalars Advected by Incompressible Fields}}} \\
+\cventry{BSc Mathematics}{2014 to 2018}{Obafemi Awolowo University}{Nigeria}{}
 
 %---------- EXPERIENCE ----------
 \section{Experience}
 
-\cventry{Generative AI Engineer (Freelance)}{Oct 2025 -- Present}{}{}{}
+\cventry{Generative AI Engineer (Freelance)}{Oct 2025 to Present}{}{}{}
 \begin{itemize}
-  \item Designed and deployed production-ready LLM applications using retrieval-augmented generation (RAG)
-  \item Built LLM-powered data pipelines for automated document analysis and semantic search
-  \item Developed vector search systems using Pinecone, FAISS, and ChromaDB for large-scale data retrieval
+  \item Built a conversational medical RAG assistant (ChromaDB + LangChain ReAct) over the MedQuad knowledge base, with context-aware multi-turn memory
+  \item Developed an autonomous data analyst agent using LangChain's Pandas DataFrame Agent; performs correlation analysis, visualisation, and ARIMA forecasting from plain English
+  \item Fine-tuned Llama-3.2-1B (LoRA) and Llama-3-8B (QLoRA, 4-bit NF4) using HuggingFace PEFT, enabling 8B-parameter training on a single GPU
 \end{itemize}
 
 \medskip
-\cventry{Data Scientist}{Dec 2024 -- Sep 2025}{Intuos Srl}{L'Aquila}{}
+\cventry{Data Scientist}{Dec 2024 to Sep 2025}{Intuos Srl}{L'Aquila}{}
 \begin{itemize}
   \item Developed dashboards for flight performance analysis, surfacing key operational metrics for decision-making
   \item Built automated data pipelines for real-time telemetry ingestion and processing
@@ -80,7 +80,7 @@ Data Scientist and Machine Learning Engineer with 3+ years of production experie
 \end{itemize}
 
 \medskip
-\cventry{Machine Learning Engineer / Data Analyst}{Apr 2023 -- Nov 2024}{N-and Italia Srl}{Bergamo}{}
+\cventry{Machine Learning Engineer / Data Analyst}{Apr 2023 to Nov 2024}{N-and Italia Srl}{Bergamo}{}
 \begin{itemize}
   \item Analysed log data from 154 vending machines, processing up to 1.5M transactions per machine to extract insights on user behaviour, system performance, and failure patterns
   \item Built dashboards tracking delivery success/failure rates, connectivity KPIs, and transaction volumes across the full machine fleet
@@ -90,13 +90,13 @@ Data Scientist and Machine Learning Engineer with 3+ years of production experie
 \end{itemize}
 
 \medskip
-\cventry{Operational Data Analyst}{2023}{eResult Srl}{Cesena}{}
+\cventry{Operational Data Analyst}{Jan 2023 to Mar 2023}{eResult Srl}{Cesena}{}
 \begin{itemize}
   \item Optimised SQL queries and database performance; built automated dashboards and reporting systems
 \end{itemize}
 
 \medskip
-\cventry{Digital Engineering Intern}{2022}{Bridgestone EMIA}{Rome}{}
+\cventry{Digital Engineering Intern}{Apr 2022 to Oct 2022}{Bridgestone EMIA}{Rome}{}
 \begin{itemize}
   \item Contributed to improving Product Lifecycle Management (PLM) tools for tire development workflows
   \item Worked on the digital twin platform used for tire engineering and simulation
@@ -112,23 +112,29 @@ Data Scientist and Machine Learning Engineer with 3+ years of production experie
 \section{Selected Projects}
 
 \noindent
-\textbf{\href{https://github.com/adebanjiadelowo/llm-portfolio/tree/main/03-bank-customer-risk-engine}{Bank Customer Risk Engine}} ---
+\textbf{\href{https://github.com/adebanjiadelowo/llm-portfolio/tree/main/03-bank-customer-risk-engine}{Bank Customer Risk Engine}}:
 Embedding-powered risk scoring system for retail banking: encodes customer profiles into 384-dim sentence-transformer vectors, trains a multi-output model to simultaneously predict loan approval probability, default risk, and interest rate; cosine-similarity search enables nearest-neighbour profiling.
 \textit{Stack: sentence-transformers, XGBoost, scikit-learn, UMAP, Python}
 
-\textbf{\href{https://github.com/adebanjiadelowo/llm-portfolio/tree/main/02-enterprise-nl2sql}{Enterprise NL2SQL Pipeline}} ---
+\textbf{\href{https://github.com/adebanjiadelowo/llm-portfolio/tree/main/02-enterprise-nl2sql}{Enterprise NL2SQL Pipeline}}:
 Two-stage LLM pipeline converting natural language to SQL over an 8-table enterprise database, cutting prompt token cost by \textbf{$\sim$60\%}. Complexity router auto-escalates multi-table queries; includes retry logic and SQL injection guard.
 \textit{Stack: OpenAI API (GPT-4o-mini), Python, pandas, SQLite}
 
-\textbf{\href{https://github.com/adebanjiadelowo/llm-portfolio/tree/main/01-financial-sentiment-distillation}{Financial Sentiment Distillation}} ---
+\textbf{\href{https://github.com/adebanjiadelowo/llm-portfolio/tree/main/01-financial-sentiment-distillation}{Financial Sentiment Distillation}}:
 Compressed FinBERT by 62\% (110M $\to$ 88M parameters) via Taylor-gradient pruning and knowledge distillation, improving accuracy from 84.5\% to \textbf{96.9\%} on the financial\_phrasebank benchmark.
 \textit{Stack: PyTorch, HuggingFace Transformers, scikit-learn}
 
-\textbf{\href{https://github.com/AdebanjiAdelowo/generative-ai-portfolio/blob/main/End-to-End-AI-Applications/End-to-end-Medical-Chatbot-Generative-AI}{RAG Medical Chatbot}} --- Document Q\&A system using RAG with Pinecone semantic search; enables natural-language querying of large document collections. \textit{Stack: OpenAI, Pinecone, LangChain, Flask}
+\textbf{\href{https://github.com/adebanjiadelowo/llm-portfolio/tree/main/04-data-analyst-agent}{LLM-Powered Data Analyst Agent}}: Autonomous data analysis agent using LangChain's Pandas DataFrame Agent; accepts natural-language instructions to clean data, identify correlations, generate visualisations, and run forecasting models (ARIMA) against a real climate dataset.
+\textit{Stack: LangChain, OpenAI GPT, Pandas, Python}
 
-\textbf{\href{https://github.com/AdebanjiAdelowo/generative-ai-portfolio/tree/main/Cloud-LLM-Apps}{Multi-Provider RAG Systems}} --- Portable RAG pipelines across OpenAI, AWS Bedrock, and Vertex AI with modular provider-switching architecture. \textit{Stack: Bedrock, FAISS/ChromaDB, LangChain, Streamlit}
+\textbf{\href{https://github.com/adebanjiadelowo/llm-portfolio/tree/main/05-medical-rag-assistant}{Medical RAG Assistant}}: Conversational medical assistant over the MedQuad Q\&A knowledge base; ChromaDB stores embeddings, a LangChain ReAct agent routes medical vs.\ general queries, and ConversationBufferWindowMemory maintains context across turns.
+\textit{Stack: LangChain, ChromaDB, OpenAI, HuggingFace}
 
-\textbf{\href{https://github.com/AdebanjiAdelowo/generative-ai-portfolio/blob/main/Fine-Tuning-LLMs/Llama2-Fine-Tuning}{Llama 2 Fine-Tuning}} --- Supervised fine-tuning of Llama 2 for domain-specific adaptation using HuggingFace PEFT; benchmarked task accuracy improvements over the base model. \textit{Stack: Llama 2, HuggingFace, PEFT}
+\textbf{\href{https://github.com/adebanjiadelowo/llm-portfolio/tree/main/06-llm-evaluation-langsmith}{LLM Evaluation with LangSmith}}: Systematic evaluation framework comparing T5-base, fine-tuned T5, and OpenAI GPT on CNN/DailyMail summarisation using LangSmith tracing and cosine embedding distance; shows domain fine-tuning closes most of the gap with proprietary models.
+\textit{Stack: LangSmith, LangChain, HuggingFace T5, OpenAI}
+
+\textbf{\href{https://github.com/adebanjiadelowo/llm-portfolio/tree/main/07-lora-qlora-finetuning}{LoRA and QLoRA Fine-Tuning}}: Parameter-efficient fine-tuning of Llama-3.2-1B (LoRA) and Llama-3-8B (QLoRA with 4-bit NF4 quantisation); trains less than 1\% of model weights, enabling 8B-parameter fine-tuning on a single 16\,GB GPU.
+\textit{Stack: PEFT, BitsAndBytes, HuggingFace Transformers, trl}
 
 %---------- SKILLS ----------
 \section{Skills}
@@ -147,9 +153,9 @@ Feature engineering, model evaluation
 
 \medskip
 \textbf{Generative AI \& LLMs}\\
-LangChain, LlamaIndex, HuggingFace Transformers\\
+LangChain, LangSmith, HuggingFace Transformers\\
 OpenAI, AWS Bedrock, Google Vertex AI\\
-RAG, Prompt Engineering, Fine-tuning
+RAG, Prompt Engineering, Fine-tuning, PEFT
 
 \columnbreak
 
