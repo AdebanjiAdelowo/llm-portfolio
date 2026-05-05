@@ -24,8 +24,8 @@ A hands-on implementation of parameter-efficient fine-tuning (PEFT) techniques �
 ## Notebooks
 | Notebook | Description |
 |---|---|
-| [lora_tuning.ipynb](notebooks/lora_tuning.ipynb) | LoRA fine-tuning of Llama-3.2-1B — full-precision adapter training |
-| [qlora_tuning.ipynb](notebooks/qlora_tuning.ipynb) | QLoRA fine-tuning of Llama-3-8B — 4-bit quantized model + LoRA adapters |
+| [lora_finetuning.ipynb](notebooks/lora_finetuning.ipynb) | LoRA fine-tuning of Llama-3.2-1B — full-precision adapter training |
+| [qlora_finetuning.ipynb](notebooks/qlora_finetuning.ipynb) | QLoRA fine-tuning of Llama-3-8B — 4-bit quantized model + LoRA adapters |
 
 ## Setup
 ```bash
