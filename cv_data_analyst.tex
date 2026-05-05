@@ -38,7 +38,7 @@
 %---------- HEADER ----------
 \begin{center}
   {\LARGE\bfseries\color{VividPurple} Adebanji Adelowo}\\[4pt]
-  {\large Data Scientist \textbar{} Machine Learning Engineer \textbar{} AI/LLM Engineer}\\[4pt]
+  {\large Data Analyst \textbar{} Data Scientist \textbar{} Machine Learning Engineer}\\[4pt]
   \small
   \href{mailto:adelowooluwatimileyin@gmail.com}{adelowooluwatimileyin@gmail.com} \quad
   +39 388 751 5527 \quad
@@ -52,7 +52,7 @@
 
 %---------- PROFILE ----------
 \section{Profile}
-Data Scientist and Machine Learning Engineer with 3+ years of production experience and an MSc in Mathematical Engineering (106/110). Delivers data-driven insights from complex datasets — from tracking 1.5M+ transactions across 154 machines to predictive failure modelling and automated reporting — and builds end-to-end AI systems, including a two-stage NL2SQL pipeline (60\% token cost reduction) and a compressed FinBERT model (84.5\% $\to$ 96.9\% accuracy). Skilled across the full stack: SQL, Power BI, Python, RAG pipelines, LLM fine-tuning, vector databases, and cloud deployment on AWS and Vertex AI.
+Data Analyst and Machine Learning Engineer with 3+ years of production experience and an MSc in Mathematical Engineering (106/110). Delivers actionable insights from complex datasets — from tracking 1.5M+ transactions across 154 machines to building predictive failure models and automated reporting pipelines. Combines strong analytical and statistical foundations with Python, SQL, and Power BI, and applies ML and AI techniques to solve real business problems.
 
 %---------- EDUCATION ----------
 \section{Education}
@@ -65,16 +65,16 @@ Data Scientist and Machine Learning Engineer with 3+ years of production experie
 
 \cventry{Generative AI Engineer (Freelance)}{Oct 2025 -- Present}{}{}{}
 \begin{itemize}
-  \item Designed and deployed production-ready LLM applications using retrieval-augmented generation (RAG)
-  \item Built LLM-powered data pipelines for automated document analysis and semantic search
-  \item Developed vector search systems using Pinecone, FAISS, and ChromaDB for large-scale data retrieval
+  \item Built LLM-powered data pipelines for automated document analysis and information extraction
+  \item Developed semantic search systems using vector databases for large-scale data retrieval
+  \item Designed and deployed conversational AI tools for data querying and reporting workflows
 \end{itemize}
 
 \medskip
 \cventry{Data Scientist}{Dec 2024 -- Sep 2025}{Intuos Srl}{L'Aquila}{}
 \begin{itemize}
-  \item Developed dashboards for flight performance analysis, surfacing key operational metrics for decision-making
-  \item Built automated data pipelines for real-time telemetry ingestion and processing
+  \item Developed dashboards for flight performance analysis, surfacing key metrics for operational decisions
+  \item Built and maintained automated data pipelines for real-time telemetry ingestion and processing
   \item Implemented ML classifier for flight phase identification using time-series sensor data
   \item Built REST APIs (50+ endpoints) integrating data models into flight and pilot management systems
 \end{itemize}
@@ -83,7 +83,7 @@ Data Scientist and Machine Learning Engineer with 3+ years of production experie
 \cventry{Machine Learning Engineer / Data Analyst}{Apr 2023 -- Nov 2024}{N-and Italia Srl}{Bergamo}{}
 \begin{itemize}
   \item Analysed log data from 154 vending machines, processing up to 1.5M transactions per machine to extract insights on user behaviour, system performance, and failure patterns
-  \item Built dashboards tracking delivery success/failure rates, connectivity KPIs, and transaction volumes across the full machine fleet
+  \item Built dashboards tracking delivery success/failure rates, connectivity issues, and transaction KPIs across the full machine fleet
   \item Conducted product preference analysis across 20+ SKUs and profiled user behaviour across UI interaction stages to support UX improvements
   \item Developed predictive models for delivery failure forecasting, identifying key pre-failure event sequences (OAA, UIPU, EIL, EID)
   \item Investigated system reliability metrics including OS failures and mean delivery vs.\ selection time across 154 machines
@@ -92,7 +92,8 @@ Data Scientist and Machine Learning Engineer with 3+ years of production experie
 \medskip
 \cventry{Operational Data Analyst}{2023}{eResult Srl}{Cesena}{}
 \begin{itemize}
-  \item Optimised SQL queries and database performance; built automated dashboards and reporting systems
+  \item Optimised SQL queries and database performance, reducing report generation time
+  \item Built automated dashboards and reporting systems for operational monitoring
 \end{itemize}
 
 \medskip
@@ -113,22 +114,20 @@ Data Scientist and Machine Learning Engineer with 3+ years of production experie
 
 \noindent
 \textbf{\href{https://github.com/adebanjiadelowo/llm-portfolio/tree/main/03-bank-customer-risk-engine}{Bank Customer Risk Engine}} ---
-Embedding-powered risk scoring system for retail banking: encodes customer profiles into 384-dim sentence-transformer vectors, trains a multi-output model to simultaneously predict loan approval probability, default risk, and interest rate; cosine-similarity search enables nearest-neighbour profiling.
+Embedding-powered risk scoring system for retail banking: encodes customer profiles into dense vectors, then trains a multi-output model to simultaneously predict loan approval probability, default risk, and interest rate.
 \textit{Stack: sentence-transformers, XGBoost, scikit-learn, UMAP, Python}
 
 \textbf{\href{https://github.com/adebanjiadelowo/llm-portfolio/tree/main/02-enterprise-nl2sql}{Enterprise NL2SQL Pipeline}} ---
-Two-stage LLM pipeline converting natural language to SQL over an 8-table enterprise database, cutting prompt token cost by \textbf{$\sim$60\%}. Complexity router auto-escalates multi-table queries; includes retry logic and SQL injection guard.
-\textit{Stack: OpenAI API (GPT-4o-mini), Python, pandas, SQLite}
+Two-stage LLM pipeline converting natural language to SQL over an 8-table enterprise database, cutting prompt token cost by \textbf{$\sim$60\%}. Enables non-technical users to query databases in plain English.
+\textit{Stack: OpenAI API, Python, pandas, SQLite}
 
 \textbf{\href{https://github.com/adebanjiadelowo/llm-portfolio/tree/main/01-financial-sentiment-distillation}{Financial Sentiment Distillation}} ---
-Compressed FinBERT by 62\% (110M $\to$ 88M parameters) via Taylor-gradient pruning and knowledge distillation, improving accuracy from 84.5\% to \textbf{96.9\%} on the financial\_phrasebank benchmark.
+Compressed FinBERT by 62\% via pruning and knowledge distillation, improving accuracy from 84.5\% to \textbf{96.9\%} on financial news sentiment classification.
 \textit{Stack: PyTorch, HuggingFace Transformers, scikit-learn}
 
 \textbf{\href{https://github.com/AdebanjiAdelowo/generative-ai-portfolio/blob/main/End-to-End-AI-Applications/End-to-end-Medical-Chatbot-Generative-AI}{RAG Medical Chatbot}} --- Document Q\&A system using RAG with Pinecone semantic search; enables natural-language querying of large document collections. \textit{Stack: OpenAI, Pinecone, LangChain, Flask}
 
-\textbf{\href{https://github.com/AdebanjiAdelowo/generative-ai-portfolio/tree/main/Cloud-LLM-Apps}{Multi-Provider RAG Systems}} --- Portable RAG pipelines across OpenAI, AWS Bedrock, and Vertex AI with modular provider-switching architecture. \textit{Stack: Bedrock, FAISS/ChromaDB, LangChain, Streamlit}
-
-\textbf{\href{https://github.com/AdebanjiAdelowo/generative-ai-portfolio/blob/main/Fine-Tuning-LLMs/Llama2-Fine-Tuning}{Llama 2 Fine-Tuning}} --- Supervised fine-tuning of Llama 2 for domain-specific adaptation using HuggingFace PEFT; benchmarked task accuracy improvements over the base model. \textit{Stack: Llama 2, HuggingFace, PEFT}
+\textbf{\href{https://github.com/AdebanjiAdelowo/generative-ai-portfolio/blob/main/End-to-End-AI-Applications/End-to-end-Source-Code-Analysis-Generative-AI}{LLM Code Analysis Tool}} --- Natural-language querying over full codebases; indexed with ChromaDB for semantic retrieval. \textit{Stack: OpenAI, ChromaDB, LangChain, Flask}
 
 %---------- SKILLS ----------
 \section{Skills}
@@ -146,25 +145,23 @@ Predictive modelling, classification, time series\\
 Feature engineering, model evaluation
 
 \medskip
-\textbf{Generative AI \& LLMs}\\
-LangChain, LlamaIndex, HuggingFace Transformers\\
-OpenAI, AWS Bedrock, Google Vertex AI\\
-RAG, Prompt Engineering, Fine-tuning
+\textbf{AI \& LLMs}\\
+LangChain, HuggingFace Transformers\\
+RAG, embeddings, fine-tuning, prompt engineering
 
 \columnbreak
 
 \textbf{Software Engineering}\\
 Python, SQL, FastAPI, Flask\\
-REST APIs, Microservices, Git, Docker
+REST APIs, Git, Docker
 
 \medskip
-\textbf{Cloud \& MLOps}\\
-AWS, Vertex AI, Model deployment, LLMOps
+\textbf{Cloud \& Data Infrastructure}\\
+AWS, Vertex AI, Pinecone, FAISS, ChromaDB\\
+Automated pipelines, data ingestion
 
 \medskip
-\textbf{Vector Databases}\\
-Pinecone, FAISS, ChromaDB
-
+\textbf{Vector Databases:} Pinecone, FAISS, ChromaDB
 \end{multicols}
 
 \end{document}
