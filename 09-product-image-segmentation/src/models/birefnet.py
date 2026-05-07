@@ -33,7 +33,7 @@ class BiRefNetModel(BaseSegmentationModel):
         from torchvision.transforms.functional import normalize as tv_normalize
 
         self._model = AutoModelForImageSegmentation.from_pretrained(
-            "zhengpeng7/BiRefNet", trust_remote_code=True
+            "zhengpeng7/BiRefNet", trust_remote_code=True, torch_dtype=torch.float32
         )
         self._model.to(self.device).eval()
 
