@@ -55,7 +55,8 @@ def load_model(model_id: str, device: str):
 
 
 def caption_batch(images: list, processor, model, device: str, max_new_tokens: int) -> list[str]:
-    inputs = processor(images=images, return_tensors="pt").to(device, torch.float16)
+    dtype = torch.float16 if device == "cuda" else torch.float32
+    inputs = processor(images=images, return_tensors="pt").to(device, dtype)
     with torch.no_grad():
         ids = model.generate(**inputs, max_new_tokens=max_new_tokens)
     return processor.batch_decode(ids, skip_special_tokens=True)

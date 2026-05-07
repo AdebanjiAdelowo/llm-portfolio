@@ -45,19 +45,22 @@ def parse_args():
     return parser.parse_args()
 
 
-def load_prompts(prompts_file: str | None) -> list[str]:
+def load_prompts(prompts_file) -> list:
     if prompts_file and Path(prompts_file).exists():
-        return [l.strip() for l in Path(prompts_file).read_text().splitlines() if l.strip()]
+        return [ln.strip() for ln in Path(prompts_file).read_text().splitlines() if ln.strip()]
     return DEFAULT_PROMPTS
 
 
 def load_base_pipeline(model_id: str) -> DiffusionPipeline:
-    pipe = DiffusionPipeline.from_pretrained(
-        model_id,
-        torch_dtype=torch.float16,
-        variant="fp16",
-        use_safetensors=True,
-    )
+    # Try fp16 variant first (official SDXL release); fall back to default weights
+    try:
+        pipe = DiffusionPipeline.from_pretrained(
+            model_id, torch_dtype=torch.float16, variant="fp16", use_safetensors=True,
+        )
+    except Exception:
+        pipe = DiffusionPipeline.from_pretrained(
+            model_id, torch_dtype=torch.float16, use_safetensors=True,
+        )
     pipe.to("cuda")
     pipe.set_progress_bar_config(disable=True)
     return pipe
