@@ -6,7 +6,7 @@
 
 ---
 
-A collection of end-to-end Large Language Model projects covering model optimization, NL2SQL pipelines, embedding-based systems, LangChain agents, RAG, evaluation frameworks, and parameter-efficient fine-tuning.
+A collection of end-to-end projects spanning large language models, computer vision, and generative AI — covering model optimization, NL2SQL pipelines, embedding-based systems, LangChain agents, RAG, evaluation frameworks, parameter-efficient fine-tuning, diffusion model adaptation, and image segmentation.
 
 ## Projects
 
@@ -19,6 +19,8 @@ A collection of end-to-end Large Language Model projects covering model optimiza
 | 05 | [Medical RAG Assistant](#05-medical-rag-assistant) | Healthcare / NLP | RAG, ChromaDB, Conversational Memory |
 | 06 | [LLM Evaluation with LangSmith](#06-llm-evaluation-with-langsmith) | MLOps / Evaluation | Embedding Distance, LangSmith Tracing |
 | 07 | [LoRA & QLoRA Fine-Tuning](#07-lora--qlora-fine-tuning) | Model Training | PEFT, LoRA, 4-bit Quantization |
+| 08 | [Diffusion LoRA on Product Images](#08-diffusion-lora-fine-tuning-on-product-images) | Generative AI / CV | SDXL LoRA, DreamBooth, BLIP-2 Captioning |
+| 09 | [Product Image Segmentation Pipeline](#09-product-image-segmentation-and-matting-pipeline) | Computer Vision | BiRefNet, U²-Net, FastAPI, Multi-model Benchmarking |
 
 ---
 
@@ -126,6 +128,64 @@ Parameter-efficient fine-tuning of large language models using LoRA and QLoRA. D
 
 ---
 
+## 08 Diffusion LoRA Fine-Tuning on Product Images
+
+**Folder:** `08-diffusion-lora-product-images/`
+
+Domain adaptation of a Stable Diffusion model (SDXL 1.0) on a curated eyewear product photography dataset using LoRA. Only low-rank adapter weights are trained on top of the frozen base model — enabling commercially-presentable domain-specific generation in ~4 hours on a free T4 GPU.
+
+**Pipeline:**
+```
+Raw Images → Curation (filter / resize / dedup) → BLIP-2 Auto-Caption (+ trigger word)
+           → LoRA Training on SDXL U-Net cross-attention → Adapter Checkpoint
+           → Inference Comparison Grid · CLIP-score evaluation
+```
+
+**Key techniques:**
+- LoRA adapter injection into U-Net cross-attention layers (`q`, `k`, `v`, `out`)
+- Automated dataset captioning with `Salesforce/blip2-opt-2.7b` + structured trigger-word prefix (`sks eyewear`)
+- DreamBooth-style training with `diffusers` + `peft` + `accelerate`
+- Before/after qualitative grids + CLIP-score quantitative evaluation
+- ComfyUI workflow export for reproducible inference
+
+**Tech stack:** diffusers, PEFT, accelerate, BLIP-2, SDXL, open\_clip, Weights & Biases, ComfyUI
+
+---
+
+## 09 Product Image Segmentation and Matting Pipeline
+
+**Folder:** `09-product-image-segmentation/`
+
+A rigorous multi-model benchmark and production-ready pipeline for background removal on e-commerce product images. Three state-of-the-art segmentation models share a common `BaseSegmentationModel` interface and are evaluated head-to-head on IoU, Dice, MAD, and boundary F1 — with a FastAPI service exposing the best model.
+
+**Architecture:**
+```
+Image → [Model: BiRefNet | U²-Net | MODNet]
+      → Raw Mask → Optional CRF/GuidedFilter Refinement
+      → RGBA Composite + Alpha mask
+      → FastAPI endpoint (/segment, /health)
+```
+
+**Models compared:**
+
+| Model | Architecture | Weights |
+|-------|-------------|---------|
+| BiRefNet | Swin-B transformer, bilateral reference | HuggingFace (`zhengpeng7/BiRefNet`) |
+| U²-Net | Nested U-Net with RSU blocks | manual download |
+| MODNet | Lightweight matting with semantic/detail/fusion branches | manual download |
+
+**Key techniques:**
+- Unified `predict(image) → float32 mask` interface across all models
+- Resize-with-padding + undo-padding to preserve original aspect ratio
+- Optional post-processing refinement (CRF / guided filter) via `--refine` flag
+- `SegmentationPipeline` with load-once / call-many lifecycle for efficient batch inference
+- FastAPI with module-level model cache (no reload per request)
+- Quantitative evaluation script: IoU, Dice, MAD, Boundary F1, throughput (ms/img)
+
+**Tech stack:** PyTorch, HuggingFace Transformers, FastAPI, OpenCV, scikit-image, BiRefNet, U²-Net, MODNet
+
+---
+
 ## Getting Started
 
 ### Prerequisites
@@ -156,6 +216,8 @@ HUGGINGFACEHUB_API_TOKEN=your_hf_token
 - **Agents & RAG** — LangChain agents, ChromaDB vector stores, ReAct reasoning, tool routing
 - **LLM Evaluation** — LangSmith tracing, embedding distance metrics, model benchmarking
 - **Fine-tuning & PEFT** — LoRA, QLoRA, 4-bit quantization, SFT training
+- **Diffusion model adaptation** — SDXL LoRA, DreamBooth, BLIP-2 auto-captioning, CLIP evaluation
+- **Computer Vision** — background removal, image segmentation, alpha matting, mask refinement
 - **Model compression** — structured pruning, knowledge distillation
 - **LLM pipelines** — multi-stage routing, prompt engineering, NL2SQL
 - **Embeddings** — semantic similarity, UMAP, nearest-neighbour retrieval, XGBoost
