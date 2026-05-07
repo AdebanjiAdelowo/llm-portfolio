@@ -1,0 +1,44 @@
+models:
+  birefnet:
+    class: BiRefNetModel
+    module: src.models.birefnet
+    input_size: [1024, 1024]
+    device: cpu
+    huggingface_id: zhengpeng7/BiRefNet
+    notes: "SOTA transformer model. No weight download needed — loads from HuggingFace."
+
+  u2net:
+    class: U2NetModel
+    module: src.models.u2net
+    variant: u2net          # u2net (full) or u2netp (lightweight)
+    input_size: [320, 320]
+    weights: weights/u2net.pth
+    device: cpu
+    notes: "Fast CNN-based salient object detection. Good baseline."
+
+  u2netp:
+    class: U2NetModel
+    module: src.models.u2net
+    variant: u2netp
+    input_size: [320, 320]
+    weights: weights/u2netp.pth
+    device: cpu
+    notes: "Lightweight 4MB version of U2Net. Suitable for edge/API deployment."
+
+  modnet:
+    class: MODNetModel
+    module: src.models.modnet
+    input_size: [512, 512]
+    weights: weights/modnet_photographic_portrait_matting.ckpt
+    device: cpu
+    notes: "Designed for portrait/product matting. Good at fine edges and hair."
+
+  sam2:
+    class: SAM2Model
+    module: src.models.sam_wrapper
+    input_size: null          # SAM2 handles variable sizes internally
+    weights: weights/sam2_hiera_large.pt
+    config: sam2_hiera_l.yaml
+    mode: auto               # auto | point | box
+    device: cpu
+    notes: "Stretch goal. Best generalization. Requires sam2 package."

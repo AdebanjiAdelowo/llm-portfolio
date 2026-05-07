@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Product Image Metadata Schema",
+  "description": "Per-image metadata for diffusion LoRA fine-tuning on product photography",
+  "type": "object",
+  "required": ["file_path", "caption", "split"],
+  "properties": {
+    "file_path": {
+      "type": "string",
+      "description": "Relative path from project root, e.g. data/processed/img_001.jpg"
+    },
+    "original_filename": {
+      "type": "string",
+      "description": "Original source filename before processing"
+    },
+    "caption": {
+      "type": "string",
+      "description": "Full training caption. Format: '<trigger_word> <blip2_caption>'. Example: 'a photo of sks eyewear black rectangular frames on white background'"
+    },
+    "trigger_word": {
+      "type": "string",
+      "description": "Rare token used as domain identifier",
+      "example": "sks eyewear"
+    },
+    "auto_caption": {
+      "type": "string",
+      "description": "Raw BLIP-2 output before trigger word injection"
+    },
+    "split": {
+      "type": "string",
+      "enum": ["train", "val"],
+      "description": "Dataset split assignment"
+    },
+    "image_width": { "type": "integer" },
+    "image_height": { "type": "integer" },
+    "aspect_ratio": {
+      "type": "number",
+      "description": "width / height, e.g. 1.0 for square"
+    },
+    "background_type": {
+      "type": "string",
+      "enum": ["white", "grey", "gradient", "lifestyle", "other"],
+      "description": "Background category for consistency filtering"
+    },
+    "product_category": {
+      "type": "string",
+      "description": "e.g. 'sunglasses', 'optical_frames', 'goggles'"
+    },
+    "color": {
+      "type": "string",
+      "description": "Dominant frame color, e.g. 'black', 'tortoise', 'gold'"
+    },
+    "frame_shape": {
+      "type": "string",
+      "description": "e.g. 'rectangular', 'round', 'cat-eye', 'aviator'"
+    },
+    "quality_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "LAION aesthetic score or manual rating (0–1)"
+    },
+    "is_duplicate": {
+      "type": "boolean",
+      "description": "Flagged true if near-duplicate detected; excluded from training"
+    },
+    "source": {
+      "type": "string",
+      "description": "Image origin: 'brand_website', 'open_images', 'kaggle_dataset', etc."
+    },
+    "license": {
+      "type": "string",
+      "description": "Usage rights — always record this for portfolio safety"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Manual annotation notes or known issues with this image"
+    }
+  },
+  "examples": [
+    {
+      "file_path": "data/processed/img_001.jpg",
+      "original_filename": "ray-ban-rb3025-aviator.jpg",
+      "caption": "a photo of sks eyewear gold aviator sunglasses on white background, studio lighting, product shot",
+      "trigger_word": "sks eyewear",
+      "auto_caption": "gold aviator sunglasses on white background studio lighting product shot",
+      "split": "train",
+      "image_width": 1024,
+      "image_height": 1024,
+      "aspect_ratio": 1.0,
+      "background_type": "white",
+      "product_category": "sunglasses",
+      "color": "gold",
+      "frame_shape": "aviator",
+      "quality_score": 0.82,
+      "is_duplicate": false,
+      "source": "open_images",
+      "license": "CC BY 4.0",
+      "notes": ""
+    }
+  ]
+}

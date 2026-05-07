@@ -1,0 +1,74 @@
+# LoRA Fine-Tuning Configuration
+# Adapt paths and hyperparameters to your environment before running.
+
+# ── Model ──────────────────────────────────────────────────────────────────────
+model:
+  base_model_id: "stabilityai/stable-diffusion-xl-base-1.0"
+  # fallback for <12GB VRAM: "runwayml/stable-diffusion-v1-5"
+  revision: null
+  torch_dtype: "float16"   # bfloat16 on A100, float16 on T4
+
+# ── LoRA Adapter ───────────────────────────────────────────────────────────────
+lora:
+  rank: 16                  # r=4 for minimal params, r=32 for more capacity
+  alpha: 32                 # typically 2× rank
+  dropout: 0.05
+  target_modules:
+    - "to_q"
+    - "to_k"
+    - "to_v"
+    - "to_out.0"
+    - "proj_in"
+    - "proj_out"
+    - "ff.net.0.proj"
+    - "ff.net.2"
+  # SDXL also has a text encoder — set train_text_encoder: true to fine-tune it
+  train_text_encoder: false
+
+# ── Dataset ───────────────────────────────────────────────────────────────────
+dataset:
+  image_dir: "data/processed/"
+  metadata_file: "data/metadata.csv"
+  image_column: "file_path"
+  caption_column: "caption"
+  resolution: 1024           # 512 for SD 1.5, 1024 for SDXL
+  center_crop: true
+  random_flip: true
+
+# ── Training ──────────────────────────────────────────────────────────────────
+training:
+  output_dir: "outputs/lora_weights/"
+  seed: 42
+
+  num_train_epochs: 10
+  max_train_steps: 2000     # 1000–3000 is the practical range for 100 images
+  # Steps to reach: num_images × epochs / batch_size
+  # 100 images × 10 epochs / 1 batch = 1000 steps
+
+  train_batch_size: 1       # 2 on A100
+  gradient_accumulation_steps: 4  # effective batch = 4
+  learning_rate: 1.0e-4
+  lr_scheduler: "cosine"
+  lr_warmup_steps: 100
+
+  mixed_precision: "fp16"   # "bf16" on A100
+  gradient_checkpointing: true   # saves ~30% VRAM
+
+  # Checkpointing
+  checkpointing_steps: 500
+  resume_from_checkpoint: null   # "latest" to resume
+
+# ── Validation ────────────────────────────────────────────────────────────────
+validation:
+  prompt: "a product photo of sks eyewear on a clean white background, studio lighting, sharp focus"
+  negative_prompt: "blurry, low quality, distorted, cartoon, illustration"
+  num_validation_images: 4
+  validation_steps: 250         # run validation every N steps
+  num_inference_steps: 30
+  guidance_scale: 7.5
+
+# ── Logging ───────────────────────────────────────────────────────────────────
+logging:
+  report_to: "wandb"            # "tensorboard" if no W&B account
+  run_name: "sdxl-lora-eyewear-r16"
+  log_every_n_steps: 25

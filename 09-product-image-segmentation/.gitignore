@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+*.egg
+
+# Model weights
+weights/*.pth
+weights/*.ckpt
+weights/*.pt
+weights/*.bin
+!weights/.gitkeep
+
+# Outputs (keep directory structure, not files)
+outputs/masks/*
+outputs/composites/*
+outputs/eval/*
+outputs/visuals/*
+!outputs/**/.gitkeep
+
+# Data
+data/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# HuggingFace cache
+.cache/
+~/.cache/huggingface/
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Environment
+.env
+.env.local

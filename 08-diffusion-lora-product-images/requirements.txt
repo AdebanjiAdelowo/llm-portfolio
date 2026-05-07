@@ -1,0 +1,33 @@
+# Core diffusion + LoRA stack
+torch>=2.1.0
+torchvision>=0.16.0
+diffusers>=0.25.0
+transformers>=4.36.0
+peft>=0.7.0
+accelerate>=0.26.0
+
+# Dataset curation
+Pillow>=10.0.0
+imagehash>=4.3.1
+opencv-python>=4.8.0
+
+# Training utilities
+bitsandbytes>=0.41.0   # quantization (optional but useful for <16GB VRAM)
+safetensors>=0.4.0
+
+# Captioning
+# Salesforce/blip2-opt-2.7b loaded via transformers — no extra install needed
+
+# Evaluation
+open_clip_torch>=2.24.0
+
+# Logging & experiment tracking
+wandb>=0.16.0
+
+# Notebook / analysis
+matplotlib>=3.7.0
+pandas>=2.0.0
+pyyaml>=6.0
+tqdm>=4.65.0
+
+# Note: ComfyUI has its own requirements — see comfyui/comfyui_notes.md for setup
