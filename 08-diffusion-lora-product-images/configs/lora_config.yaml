@@ -6,7 +6,7 @@ model:
   base_model_id: "stabilityai/stable-diffusion-xl-base-1.0"
   # fallback for <12GB VRAM: "runwayml/stable-diffusion-v1-5"
   revision: null
-  torch_dtype: "float16"   # bfloat16 on A100, float16 on T4
+  torch_dtype: "float32"   # float32 for MPS (Apple Silicon); float16 on T4/A100
 
 # ── LoRA Adapter ───────────────────────────────────────────────────────────────
 lora:
@@ -31,7 +31,7 @@ dataset:
   metadata_file: "data/metadata.csv"
   image_column: "file_path"
   caption_column: "caption"
-  resolution: 1024           # 512 for SD 1.5, 1024 for SDXL
+  resolution: 512            # 512 on MPS to fit in unified memory; 1024 on A100/T4
   center_crop: true
   random_flip: true
 
@@ -51,7 +51,7 @@ training:
   lr_scheduler: "cosine"
   lr_warmup_steps: 100
 
-  mixed_precision: "fp16"   # "bf16" on A100
+  mixed_precision: "no"     # MPS doesn't support mixed precision; "fp16" on T4, "bf16" on A100
   gradient_checkpointing: true   # saves ~30% VRAM
 
   # Checkpointing
@@ -69,6 +69,6 @@ validation:
 
 # ── Logging ───────────────────────────────────────────────────────────────────
 logging:
-  report_to: "wandb"            # "tensorboard" if no W&B account
+  report_to: "tensorboard"      # "wandb" if you have a W&B account
   run_name: "sdxl-lora-eyewear-r16"
   log_every_n_steps: 25
